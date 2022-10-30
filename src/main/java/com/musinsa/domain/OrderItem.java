@@ -28,4 +28,8 @@ public class OrderItem {
             throw new IllegalArgumentException("주문 수량이 음수이면 주문 상품을 생성할 수 없습니다.");
         }
     }
+
+    public BigDecimal getAmount() {
+        return price.multiply(quantity);
+    }
 }

@@ -1,5 +1,6 @@
 package com.musinsa.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
@@ -18,7 +19,13 @@ class OrderItemTest {
 
     @Test
     void 상품_id_없이_주문상품을_생성할_수_없다() {
-        assertThatThrownBy(() -> new OrderItem(null, BigDecimal.valueOf(1000), BigDecimal.valueOf(1000)))
+        assertThatThrownBy(() -> new OrderItem(null, BigDecimal.valueOf(10), BigDecimal.valueOf(1000)))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 주문상품의_금액을_계산한다() {
+        final OrderItem orderItem = new OrderItem(1L, BigDecimal.valueOf(10), BigDecimal.valueOf(1000));
+        assertThat(orderItem.getAmount()).isEqualTo(BigDecimal.valueOf(10000));
     }
 }
