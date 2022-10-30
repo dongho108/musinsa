@@ -1,0 +1,36 @@
+package com.musinsa.dao;
+
+import com.musinsa.domain.Product;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ProductStore implements ProductDao {
+
+    private final AtomicLong id = new AtomicLong(0);
+    private final Map<Long, Product> store = new ConcurrentHashMap<>();
+
+    @Override
+    public Product save(final Product entity) {
+        final Product product = new Product(id.addAndGet(1),
+                entity.getSerialNumber(),
+                entity.getName(),
+                entity.getPrice(),
+                entity.getStock());
+        return store.put(id.get(), product);
+    }
+
+    @Override
+    public Product findById(final Long id) {
+        return store.get(id);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return new ArrayList<>(store.values());
+    }
+}
