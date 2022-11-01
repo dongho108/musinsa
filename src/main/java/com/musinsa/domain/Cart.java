@@ -13,6 +13,14 @@ public class Cart {
         this.cartProducts = cartProducts;
     }
 
+    public List<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void add(final CartProduct cartProduct) {
+        cartProducts.add(cartProduct);
+    }
+
     private void validateCartProducts(final List<CartProduct> cartProducts) {
         if (cartProducts == null) {
             throw new IllegalArgumentException("장바구니 상품들이 null 이면 장바구니 상품을 생성할 수 없습니다.");

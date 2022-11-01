@@ -4,6 +4,7 @@ import com.musinsa.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Repository;
@@ -32,5 +33,12 @@ public class ProductStore implements ProductDao {
     @Override
     public List<Product> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public Optional<Product> findByProductSerialNumber(final String serialNumber) {
+        return findAll().stream()
+                .filter(it -> it.getSerialNumber().equals(serialNumber))
+                .findFirst();
     }
 }
