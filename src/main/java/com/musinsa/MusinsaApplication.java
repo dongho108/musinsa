@@ -20,6 +20,7 @@ public class MusinsaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) throws Exception {
+		mainController.init();
 		mainController.run();
 	}
 }
