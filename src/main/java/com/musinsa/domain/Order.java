@@ -8,9 +8,14 @@ public class Order {
     private static final BigDecimal DELIVERY_AMOUNT = BigDecimal.valueOf(2500);
 
     private Long id;
+    private Long cartId;
     private OrderItems orderItems;
 
-    public Order(final OrderItems orderItems) {
+    public Order(final Long cartId, final OrderItems orderItems) {
+        if (cartId == null) {
+            throw new IllegalArgumentException("cartId가 없으면 주문을 생성할 수 없습니다.");
+        }
+        this.cartId = cartId;
         this.orderItems = orderItems;
     }
 

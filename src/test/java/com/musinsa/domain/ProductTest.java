@@ -11,14 +11,14 @@ class ProductTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, -100})
     void 상품의_판매가격이_음수이면_상품을_생성할_수_없다(int price) {
-        assertThatThrownBy(() -> new Product("111", "무탠다드", BigDecimal.valueOf(price), 10))
+        assertThatThrownBy(() -> new Product("111", "29CM", BigDecimal.valueOf(price), 10))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, -100})
     void 상품의_재고가_음수이면_상품을_생성할_수_없다(int stock) {
-        assertThatThrownBy(() -> new Product("111", "무탠다드", BigDecimal.valueOf(1000), stock))
+        assertThatThrownBy(() -> new Product("111", "29CM", BigDecimal.valueOf(1000), stock))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -18,7 +18,7 @@ class OrderItemTest {
     }
 
     @Test
-    void 상품_id_없이_주문상품을_생성할_수_없다() {
+    void 장바구니상품_id_없이_주문상품을_생성할_수_없다() {
         assertThatThrownBy(() -> getOrderItem(null, 10, 1000))
                 .isInstanceOf(IllegalArgumentException.class);
     }

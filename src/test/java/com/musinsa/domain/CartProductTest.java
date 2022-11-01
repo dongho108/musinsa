@@ -9,13 +9,13 @@ class CartProductTest {
 
     @Test
     void 수량이_음수이면_생성할_수_없다() {
-        assertThatThrownBy(() -> new CartProduct(1L, -1, 1L, "무탠다드", BigDecimal.valueOf(1000)))
+        assertThatThrownBy(() -> new CartProduct(1L, -1, 1L, "29CM", BigDecimal.valueOf(1000)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 가격이_음수이면_생성할_수_없다() {
-        assertThatThrownBy(() -> new CartProduct(1L, 10, 1L, "무탠다드", BigDecimal.valueOf(-1000)))
+        assertThatThrownBy(() -> new CartProduct(1L, 10, 1L, "29CM", BigDecimal.valueOf(-1000)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

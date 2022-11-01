@@ -19,7 +19,7 @@ public class Cart {
         }
 
         if (cartProducts.size() == 0) {
-            throw new IllegalArgumentException("장바구니 상품들의 size가 0 이면 장바구니 상품을 생성할 수 없습니다.");
+            throw new IllegalArgumentException("장바구니 상품들이 하나도 없으면 장바구니 상품을 생성할 수 없습니다.");
         }
     }
 }

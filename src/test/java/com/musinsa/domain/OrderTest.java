@@ -1,9 +1,11 @@
 package com.musinsa.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,10 +25,18 @@ class OrderTest {
         assertThat(order.calculatePaymentAmount()).isEqualTo(BigDecimal.valueOf(price));
     }
 
+    @Test
+    void 장바구니가_null_이면_생성할_수_없다() {
+        final CartProduct 반팔 = new CartProduct(1L, 1, 1L, "29CM 반팔", BigDecimal.valueOf(1000));
+        final OrderItems orderItems = OrderItems.from(List.of(반팔));
+        assertThatThrownBy(() -> new Order(null, orderItems))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     private Order getOrder(final int price) {
-        final CartProduct 무탠다드_반팔 = new CartProduct(1L, 1, 1L, "무탠다드 반팔", BigDecimal.valueOf(price));
-        final OrderItems orderItems = OrderItems.from(List.of(무탠다드_반팔));
-        final Order order = new Order(orderItems);
+        final CartProduct 반팔 = new CartProduct(1L, 1, 1L, "29CM 반팔", BigDecimal.valueOf(price));
+        final OrderItems orderItems = OrderItems.from(List.of(반팔));
+        final Order order = new Order(1L, orderItems);
         return order;
     }
 }
