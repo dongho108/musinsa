@@ -8,10 +8,10 @@
   - [ ] 예외
     - [ ] CartProducts 가 null 이면 예외
     - [ ] List size가 0이면 예외
-  - [ ] 장바구니 상품
-    - [ ] 예외
-      - [ ] quantity가 음수
-      - [ ] price가 음수
+  - [x] 장바구니 상품
+    - [x] 예외
+      - [x] quantity가 음수
+      - [x] price가 음수
 - [ ] 상품을 주문한다.
     - [ ] 예외
       - [ ] 주문 상품들이 null 이면 예외
