@@ -36,4 +36,24 @@ public class CartProduct {
             throw new IllegalArgumentException("수량이 음수이면 장바구니 상품을 생성할 수 없습니다.");
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }

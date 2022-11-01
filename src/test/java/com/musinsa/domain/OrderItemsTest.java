@@ -10,10 +10,10 @@ class OrderItemsTest {
 
     @Test
     void 주문상품목록의_금액을_계산한다() {
-        final OrderItem orderItem1 = new OrderItem(1L, BigDecimal.valueOf(10), BigDecimal.valueOf(1000));
-        final OrderItem orderItem2 = new OrderItem(2L, BigDecimal.valueOf(20), BigDecimal.valueOf(2000));
+        final CartProduct 무탠다드_반팔 = new CartProduct(1L, 10, 1L, "무탠다드 반팔", BigDecimal.valueOf(1000));
+        final CartProduct 무탠다드_긴팔 = new CartProduct(1L, 20, 2L, "무탠다드 긴팔", BigDecimal.valueOf(2000));
 
-        final OrderItems orderItems = new OrderItems(List.of(orderItem1, orderItem2));
+        final OrderItems orderItems = OrderItems.from(List.of(무탠다드_반팔, 무탠다드_긴팔));
         assertThat(orderItems.calculateAmount()).isEqualTo(BigDecimal.valueOf(50000));
     }
 }

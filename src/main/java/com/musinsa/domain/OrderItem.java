@@ -5,14 +5,14 @@ import java.math.BigDecimal;
 public class OrderItem {
 
     private Long id;
-    private Long productId;
-    private BigDecimal quantity;
+    private Long cartProductId;
+    private Integer quantity;
     private BigDecimal price;
 
-    public OrderItem(final Long productId, final BigDecimal quantity, final BigDecimal price) {
-        validateExistProduct(productId);
+    public OrderItem(final Long cartProductId, final Integer quantity, final BigDecimal price) {
+        validateExistProduct(cartProductId);
         validateQuantity(quantity);
-        this.productId = productId;
+        this.cartProductId = cartProductId;
         this.quantity = quantity;
         this.price = price;
     }
@@ -23,13 +23,13 @@ public class OrderItem {
         }
     }
 
-    private void validateQuantity(final BigDecimal quantity) {
-        if (quantity.compareTo(BigDecimal.ZERO) < 0) {
+    private void validateQuantity(final Integer quantity) {
+        if (quantity < 0) {
             throw new IllegalArgumentException("주문 수량이 음수이면 주문 상품을 생성할 수 없습니다.");
         }
     }
 
     public BigDecimal getAmount() {
-        return price.multiply(quantity);
+        return price.multiply(BigDecimal.valueOf(quantity));
     }
 }

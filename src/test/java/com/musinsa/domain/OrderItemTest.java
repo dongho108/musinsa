@@ -13,19 +13,25 @@ class OrderItemTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, -100})
     void 주문수량이_음수이면_주문상품을_생성할_수_없다(int quantity) {
-        assertThatThrownBy(() -> new OrderItem(1L, BigDecimal.valueOf(quantity), BigDecimal.valueOf(1000)))
+        assertThatThrownBy(() -> getOrderItem(1L, quantity, 1000))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 상품_id_없이_주문상품을_생성할_수_없다() {
-        assertThatThrownBy(() -> new OrderItem(null, BigDecimal.valueOf(10), BigDecimal.valueOf(1000)))
+        assertThatThrownBy(() -> getOrderItem(null, 10, 1000))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 주문상품의_금액을_계산한다() {
-        final OrderItem orderItem = new OrderItem(1L, BigDecimal.valueOf(10), BigDecimal.valueOf(1000));
+        final OrderItem orderItem = getOrderItem(1L, 10, 1000);
         assertThat(orderItem.getAmount()).isEqualTo(BigDecimal.valueOf(10000));
+    }
+
+    private OrderItem getOrderItem(final Long cartProductId,
+                                   final Integer quantity,
+                                   final int price) {
+        return new OrderItem(cartProductId, quantity, BigDecimal.valueOf(price));
     }
 }
