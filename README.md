@@ -4,10 +4,10 @@
     - [x] 예외
         - [x] 판매가격이 음수
         - [x] 재고수량이 음수
-- [ ] 장바구니에 장바구니 상품을 담는다.
-  - [ ] 예외
-    - [ ] CartProducts 가 null 이면 예외
-    - [ ] List size가 0이면 예외
+- [x] 장바구니에 장바구니 상품을 담는다.
+  - [x] 예외
+    - [x] CartProducts 가 null 이면 예외
+    - [x] List size가 0이면 예외
   - [x] 장바구니 상품
     - [x] 예외
       - [x] quantity가 음수
