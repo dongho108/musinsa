@@ -5,28 +5,20 @@ import java.math.BigDecimal;
 public class OrderItem {
 
     private Long id;
-    private Long cartProductId;
-    private Integer quantity;
+
+    private String name;
     private BigDecimal price;
+    private Integer quantity;
 
-    public OrderItem(final Long cartProductId, final Integer quantity, final BigDecimal price) {
-        validateExistProduct(cartProductId);
-        validateQuantity(quantity);
-        this.cartProductId = cartProductId;
-        this.quantity = quantity;
+    public OrderItem(final Long id, final String name, final BigDecimal price, final Integer quantity) {
+        this.id = id;
+        this.name = name;
         this.price = price;
+        this.quantity = quantity;
     }
 
-    private void validateExistProduct(final Long productId) {
-        if (productId == null) {
-            throw new IllegalArgumentException("상품 id 없이 주문 상품을 생성할 수 없습니다.");
-        }
-    }
-
-    private void validateQuantity(final Integer quantity) {
-        if (quantity < 0) {
-            throw new IllegalArgumentException("주문 수량이 음수이면 주문 상품을 생성할 수 없습니다.");
-        }
+    public static OrderItem of(final CartProduct cartProduct) {
+        return new OrderItem(null, cartProduct.getName(), cartProduct.getPrice(), cartProduct.getQuantity());
     }
 
     public BigDecimal getAmount() {

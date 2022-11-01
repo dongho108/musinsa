@@ -1,5 +1,7 @@
 package com.musinsa.domain;
 
+import static com.musinsa.fixture.Fixture.getCartProductRequest;
+import static com.musinsa.fixture.Fixture.getProduct;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -11,8 +13,8 @@ class OrderItemsTest {
 
     @Test
     void 주문상품목록의_금액을_계산한다() {
-        final CartProduct 반팔 = new CartProduct(1L, 10, 1L, "29CM 반팔", BigDecimal.valueOf(1000));
-        final CartProduct 긴팔 = new CartProduct(1L, 20, 2L, "29CM 긴팔", BigDecimal.valueOf(2000));
+        final CartProduct 반팔 = getCartProductRequest(getProduct(10000), 1);
+        final CartProduct 긴팔 = getCartProductRequest(getProduct(20000), 2);
 
         final OrderItems orderItems = OrderItems.from(List.of(반팔, 긴팔));
         assertThat(orderItems.calculateAmount()).isEqualTo(BigDecimal.valueOf(50000));

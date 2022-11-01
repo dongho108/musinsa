@@ -10,7 +10,10 @@ public class Product {
     private BigDecimal price;
     private Integer stock;
 
-    public Product(final Long id, final String serialNumber, final String name, final BigDecimal price,
+    public Product(final Long id,
+                   final String serialNumber,
+                   final String name,
+                   final BigDecimal price,
                    final Integer stock) {
         validatePrice(price);
         validateStock(stock);
@@ -35,6 +38,16 @@ public class Product {
         if (price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("상품의 가격이 음수이면 상품을 생성할 수 없습니다.");
         }
+    }
+
+    public void reduceStock(final Integer quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("수량은 음수일 수 없습니다.");
+        }
+        if (this.stock < quantity) {
+            throw new SoldOutException();
+        }
+        this.stock -= quantity;
     }
 
     public Long getId() {

@@ -11,13 +11,11 @@ public class CartProduct {
     private String name;
     private BigDecimal price;
 
-    public CartProduct(final Long id,
-                       final Integer quantity,
-                       final Long productId,
-                       final String name,
-                       final BigDecimal price) {
-        validateQuantity(quantity);
-        validatePrice(price);
+    private CartProduct(final Long id,
+                        final Integer quantity,
+                        final Long productId,
+                        final String name,
+                        final BigDecimal price) {
         this.id = id;
         this.quantity = quantity;
         this.productId = productId;
@@ -25,16 +23,16 @@ public class CartProduct {
         this.price = price;
     }
 
-    private void validatePrice(final BigDecimal price) {
-        if (price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("가격이 음수이면 장바구니 상품을 생성할 수 없습니다.");
-        }
+    public CartProduct(final Integer quantity,
+                       final Long productId,
+                       final String name,
+                       final BigDecimal price) {
+        this(null, quantity, productId, name, price);
     }
 
-    private void validateQuantity(final Integer quantity) {
-        if (quantity < 0) {
-            throw new IllegalArgumentException("수량이 음수이면 장바구니 상품을 생성할 수 없습니다.");
-        }
+    public static CartProduct of(final Product product, final Integer quantity) {
+        product.reduceStock(quantity);
+        return new CartProduct(quantity, product.getId(), product.getName(), product.getPrice());
     }
 
     public Long getId() {

@@ -28,7 +28,7 @@ public class OrderItems {
 
     private static List<OrderItem> mapToOrderItems(final List<CartProduct> cartProducts) {
         return cartProducts.stream()
-                .map(it -> new OrderItem(it.getId(), it.getQuantity(), it.getPrice()))
+                .map(OrderItem::of)
                 .collect(Collectors.toList());
     }
 
