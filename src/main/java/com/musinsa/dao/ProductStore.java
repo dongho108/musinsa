@@ -22,7 +22,8 @@ public class ProductStore implements ProductDao {
                 entity.getName(),
                 entity.getPrice(),
                 entity.getStock());
-        return store.put(id.get(), product);
+        store.put(id.get(), product);
+        return product;
     }
 
     @Override

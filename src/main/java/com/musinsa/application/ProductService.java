@@ -1,9 +1,11 @@
 package com.musinsa.application;
 
 import com.musinsa.application.dto.ProductRequest;
+import com.musinsa.application.dto.ProductResponse;
 import com.musinsa.dao.ProductDao;
 import com.musinsa.domain.Product;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,16 +17,20 @@ public class ProductService {
         this.productDao = productDao;
     }
 
-    public Product create(final ProductRequest productRequest) {
-        return productDao.save(new Product(
+    public ProductResponse create(final ProductRequest productRequest) {
+        final Product t = new Product(
                 productRequest.getSerialNumber(),
                 productRequest.getName(),
                 productRequest.getPrice(),
                 productRequest.getStock()
-        ));
+        );
+        final Product product = productDao.save(t);
+        return ProductResponse.of(product);
     }
 
-    public List<Product> findAll() {
-        return productDao.findAll();
+    public List<ProductResponse> findAll() {
+        return productDao.findAll().stream()
+                .map(ProductResponse::of)
+                .collect(Collectors.toList());
     }
 }
