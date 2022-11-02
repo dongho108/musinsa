@@ -65,4 +65,8 @@ public class OutputView {
     private static String convertMoneyNotation(final String money) {
         return String.format("%,d", Integer.parseInt(money));
     }
+
+    public static void printErrorMessage(final String message) {
+        System.out.println(message);
+    }
 }

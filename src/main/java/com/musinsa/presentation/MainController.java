@@ -1,11 +1,8 @@
 package com.musinsa.presentation;
 
 import com.musinsa.application.CartService;
-import com.musinsa.application.OrderService;
-import com.musinsa.application.ProductService;
-import com.musinsa.application.dto.CartRequest;
-import com.musinsa.application.dto.OrderRequest;
-import com.musinsa.application.dto.OrderResponse;
+import com.musinsa.presentation.handler.Handler;
+import com.musinsa.presentation.handler.HandlerMapper;
 import com.musinsa.presentation.view.InputView;
 import com.musinsa.presentation.view.OutputView;
 import org.springframework.stereotype.Controller;
@@ -13,19 +10,16 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MainController {
 
-    private static final Long CART_ID = 1L;
-
     private final ProductInitializer productInitializer;
-    private final ProductService productService;
     private final CartService cartService;
-    private final OrderService orderService;
+    private final HandlerMapper handlerMapper;
 
-    public MainController(final ProductInitializer productInitializer, final ProductService productService,
-                          final CartService cartService, final OrderService orderService) {
+    public MainController(final ProductInitializer productInitializer,
+                          final CartService cartService,
+                          final HandlerMapper handlerMapper) {
         this.productInitializer = productInitializer;
-        this.productService = productService;
         this.cartService = cartService;
-        this.orderService = orderService;
+        this.handlerMapper = handlerMapper;
     }
 
     public void init() {
@@ -36,22 +30,15 @@ public class MainController {
     public void run() {
         while (true) {
             final String command = InputView.printCommandInformation();
-            if (command.equals("q") || command.equals("quit")) {
-                break;
-            }
-            if (command.equals("o")) {
-                OutputView.printProducts(productService.findAll());
-                while (true) {
-                    final String serialNumber = InputView.printSerialNumberInputMessage();
-                    final String quantity = InputView.printQuantityInputMessage();
-                    if (serialNumber.equals(" ") && quantity.equals(" ")) {
-                        break;
-                    }
-                    cartService.add(CartRequest.of(CART_ID, serialNumber, quantity));
+            try {
+                final Handler handler = handlerMapper.getHandler(command);
+                final boolean isContinue = handler.execute();
+                if (!isContinue) {
+                    break;
                 }
+            } catch (Exception exception) {
+                OutputView.printErrorMessage(exception.getMessage());
             }
-            final OrderResponse orderResponse = orderService.create(new OrderRequest(CART_ID));
-            OutputView.printOrderItems(orderResponse);
         }
     }
 }

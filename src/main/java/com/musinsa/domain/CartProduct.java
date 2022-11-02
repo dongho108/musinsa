@@ -6,7 +6,6 @@ public class CartProduct {
 
     private Long id;
     private Integer quantity;
-
     private Long productId;
     private String name;
     private BigDecimal price;
