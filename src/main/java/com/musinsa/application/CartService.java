@@ -1,6 +1,7 @@
 package com.musinsa.application;
 
 import com.musinsa.application.dto.CartRequest;
+import com.musinsa.application.dto.CartResponse;
 import com.musinsa.dao.CartStore;
 import com.musinsa.dao.ProductStore;
 import com.musinsa.domain.Cart;
@@ -20,11 +21,15 @@ public class CartService {
         this.cartStore = cartStore;
     }
 
-    public Cart add(final CartRequest cartRequest) {
+    public CartResponse save() {
+        return CartResponse.from(cartStore.save(Cart.createEmptyCart()));
+    }
+
+    public CartResponse add(final CartRequest cartRequest) {
         final Product product = getProductBySerialNumber(cartRequest.getSerialNumber());
         final Cart cart = cartStore.findById(cartRequest.getCartId());
         cart.add(CartProduct.of(product, cartRequest.getQuantity()));
-        return cartStore.save(cart);
+        return CartResponse.from(cartStore.save(cart));
     }
 
     private Product getProductBySerialNumber(final String serialNumber) {

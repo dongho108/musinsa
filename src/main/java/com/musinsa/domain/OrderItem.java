@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 public class OrderItem {
 
     private Long id;
-
     private String name;
     private BigDecimal price;
     private Integer quantity;
@@ -19,6 +18,14 @@ public class OrderItem {
 
     public static OrderItem of(final CartProduct cartProduct) {
         return new OrderItem(null, cartProduct.getName(), cartProduct.getPrice(), cartProduct.getQuantity());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
     }
 
     public BigDecimal getAmount() {

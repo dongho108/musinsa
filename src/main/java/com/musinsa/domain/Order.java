@@ -10,15 +10,32 @@ public class Order {
     private Long id;
     private OrderItems orderItems;
 
-    public Order(final OrderItems orderItems) {
+    public Order(final Long id, final OrderItems orderItems) {
+        this.id = id;
         this.orderItems = orderItems;
     }
 
+    public Order(final OrderItems orderItems) {
+        this(null, orderItems);
+    }
+
+    public BigDecimal calculateAmount() {
+        return orderItems.calculateAmount();
+    }
+
     public BigDecimal calculatePaymentAmount() {
-        final BigDecimal amount = orderItems.calculateAmount();
+        final BigDecimal amount = calculateAmount();
         if (amount.compareTo(MINIMUM_FREE_DELIVERY_AMOUNT) < 0) {
             return amount.add(DELIVERY_AMOUNT);
         }
         return amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public OrderItems getOrderItems() {
+        return orderItems;
     }
 }

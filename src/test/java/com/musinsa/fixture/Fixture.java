@@ -12,7 +12,7 @@ import java.util.List;
 public class Fixture {
 
     public static Cart getCart(final Long id, final List<CartProduct> cartProducts) {
-        return new Cart(id, cartProducts);
+        return Cart.of(id, cartProducts);
     }
 
     public static CartProduct getCartProductRequest(final Product product, final Integer quantity) {

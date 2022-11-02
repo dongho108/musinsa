@@ -3,10 +3,10 @@ package com.musinsa.application.dto;
 import java.math.BigDecimal;
 
 public class ProductRequest {
-    private String serialNumber;
-    private String name;
-    private BigDecimal price;
-    private Integer stock;
+    private final String serialNumber;
+    private final String name;
+    private final BigDecimal price;
+    private final Integer stock;
 
     public ProductRequest(final String serialNumber, final String name, final BigDecimal price, final Integer stock) {
         this.serialNumber = serialNumber;

@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 
 public class ProductResponse {
 
-    private String serialNumber;
-    private String name;
-    private BigDecimal price;
-    private Integer stock;
+    private final String serialNumber;
+    private final String name;
+    private final BigDecimal price;
+    private final Integer stock;
 
     private ProductResponse(final String serialNumber,
                            final String name,

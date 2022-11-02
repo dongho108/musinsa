@@ -39,4 +39,8 @@ public class OrderItems {
         }
         return sum;
     }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
 }
