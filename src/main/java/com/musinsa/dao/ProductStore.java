@@ -40,10 +40,16 @@ public class ProductStore implements ProductDao {
     }
 
     @Override
-    public Optional<Product> findByProductSerialNumber(final String serialNumber) {
+    public Optional<Product> findBySerialNumber(final String serialNumber) {
         return findAll().stream()
                 .filter(it -> it.getSerialNumber().equals(serialNumber))
                 .findFirst();
+    }
+
+    @Override
+    public Boolean existsBySerialNumber(final String serialNumber) {
+        return store.values().stream()
+                .anyMatch(it -> it.getSerialNumber().equals(serialNumber));
     }
 
     @Override

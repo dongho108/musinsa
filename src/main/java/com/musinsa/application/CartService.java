@@ -33,7 +33,7 @@ public class CartService {
     }
 
     private Product getProductBySerialNumber(final String serialNumber) {
-        return productStore.findByProductSerialNumber(serialNumber)
+        return productStore.findBySerialNumber(serialNumber)
                 .orElseThrow(() -> new NoSuchElementException("상품번호에 해당하는 상품이 존재하지 않습니다."));
     }
 

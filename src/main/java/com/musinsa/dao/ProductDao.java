@@ -5,5 +5,7 @@ import java.util.Optional;
 
 public interface ProductDao extends Store<Product> {
 
-    Optional<Product> findByProductSerialNumber(String serialNumber);
+    Optional<Product> findBySerialNumber(String serialNumber);
+
+    Boolean existsBySerialNumber(String serialNumber);
 }

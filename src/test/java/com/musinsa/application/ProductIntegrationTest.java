@@ -1,6 +1,7 @@
 package com.musinsa.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.musinsa.application.dto.ProductRequest;
@@ -37,6 +38,14 @@ class ProductIntegrationTest {
                 () -> assertThat(productResponse.getPrice()).isEqualTo(productRequest.getPrice()),
                 () -> assertThat(productResponse.getStock()).isEqualTo(productRequest.getStock())
         );
+    }
+
+    @Test
+    void 동일한_상품명으로_상품을_생성하면_예외가발생한다() {
+        final ProductRequest productRequest = getProductRequest("1234", "29CM", 1000, 10);
+        productService.create(productRequest);
+        assertThatThrownBy(() -> productService.create(productRequest))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
