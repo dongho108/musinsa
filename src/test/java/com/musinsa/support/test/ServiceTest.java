@@ -1,6 +1,6 @@
 package com.musinsa.support.test;
 
-import com.musinsa.MusinsaApplication;
+import com.musinsa.TwentyninecmApplication;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { MusinsaApplication.class },
+@ContextConfiguration(classes = { TwentyninecmApplication.class },
         initializers = ConfigDataApplicationContextInitializer.class)
 public @interface ServiceTest {
 }

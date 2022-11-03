@@ -6,16 +6,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MusinsaApplication implements CommandLineRunner {
+public class TwentyninecmApplication implements CommandLineRunner {
 
 	private final MainController mainController;
 
-	public MusinsaApplication(final MainController mainController) {
+	public TwentyninecmApplication(final MainController mainController) {
 		this.mainController = mainController;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(MusinsaApplication.class, args);
+		SpringApplication.run(TwentyninecmApplication.class, args);
 	}
 
 	@Override
