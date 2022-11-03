@@ -41,7 +41,7 @@ public class Product {
         }
     }
 
-    public void reduceStock(final Integer quantity) {
+    public synchronized void reduceStock(final Integer quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("수량은 음수일 수 없습니다.");
         }
@@ -50,7 +50,7 @@ public class Product {
         this.stock.set(this.stock.get() - quantity);
     }
 
-    private synchronized void validateQuantity(final Integer quantity) {
+    private void validateQuantity(final Integer quantity) {
         if (this.stock.get() < quantity) {
             throw new SoldOutException();
         }
