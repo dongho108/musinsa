@@ -45,4 +45,10 @@ public class ProductStore implements ProductDao {
                 .filter(it -> it.getSerialNumber().equals(serialNumber))
                 .findFirst();
     }
+
+    @Override
+    public void clear() {
+        id.set(0);
+        store.clear();
+    }
 }

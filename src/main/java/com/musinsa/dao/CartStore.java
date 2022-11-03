@@ -39,4 +39,10 @@ public class CartStore implements CartDao{
     public List<Cart> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    @Override
+    public void clear() {
+        id.set(0);
+        store.clear();
+    }
 }

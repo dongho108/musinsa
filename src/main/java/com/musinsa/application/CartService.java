@@ -21,14 +21,13 @@ public class CartService {
         this.cartStore = cartStore;
     }
 
-    public CartResponse save() {
+    public CartResponse create() {
         return CartResponse.from(cartStore.save(Cart.createEmptyCart()));
     }
 
     public CartResponse add(final CartRequest cartRequest) {
         final Product product = getProductBySerialNumber(cartRequest.getSerialNumber());
-        final Cart cart = cartStore.findById(cartRequest.getCartId())
-                .orElseThrow(() -> new NoSuchElementException("해당하는 cart 가 존재하지 않습니다."));
+        final Cart cart = getCartById(cartRequest.getCartId());
         cart.add(CartProduct.of(product, cartRequest.getQuantity()));
         return CartResponse.from(cartStore.save(cart));
     }
@@ -36,5 +35,10 @@ public class CartService {
     private Product getProductBySerialNumber(final String serialNumber) {
         return productStore.findByProductSerialNumber(serialNumber)
                 .orElseThrow(() -> new NoSuchElementException("상품번호에 해당하는 상품이 존재하지 않습니다."));
+    }
+
+    private Cart getCartById(final Long id) {
+        return cartStore.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당하는 cart 가 존재하지 않습니다."));
     }
 }

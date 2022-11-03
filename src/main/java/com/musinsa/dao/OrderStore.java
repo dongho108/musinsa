@@ -37,4 +37,10 @@ public class OrderStore implements OrderDao {
     public List<Order> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    @Override
+    public void clear() {
+        id.set(0);
+        store.clear();
+    }
 }

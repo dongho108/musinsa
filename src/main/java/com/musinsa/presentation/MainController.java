@@ -24,7 +24,7 @@ public class MainController {
 
     public void init() {
         productInitializer.initData();
-        cartService.save();
+        cartService.create();
     }
 
     public void run() {
