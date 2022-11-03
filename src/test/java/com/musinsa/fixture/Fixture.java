@@ -26,6 +26,10 @@ public class Fixture {
         return getProduct(id, "111", "29CM", price, 10);
     }
 
+    public static Product getProduct(final Long id, final Integer price, final Integer stock) {
+        return getProduct(id, "111", "29CM", price, stock);
+    }
+
     public static Product getProduct(final Integer price) {
         return getProduct(1L, "111", "29CM", price, 10);
     }

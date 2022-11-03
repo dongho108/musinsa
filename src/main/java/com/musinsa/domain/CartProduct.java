@@ -30,7 +30,6 @@ public class CartProduct {
     }
 
     public static CartProduct of(final Product product, final Integer quantity) {
-        product.reduceStock(quantity);
         return new CartProduct(quantity, product.getId(), product.getName(), product.getPrice());
     }
 

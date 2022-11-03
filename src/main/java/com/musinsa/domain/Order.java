@@ -1,6 +1,7 @@
 package com.musinsa.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Order {
 
@@ -17,7 +18,6 @@ public class Order {
 
     public static Order from(final Cart cart) {
         final OrderItems orderItems = OrderItems.from(cart.getCartProducts());
-        cart.clear();
         return new Order(null, orderItems);
     }
 
@@ -31,6 +31,11 @@ public class Order {
             return amount.add(DELIVERY_AMOUNT);
         }
         return amount;
+    }
+
+    public void place(final Cart cart, final List<Product> products) {
+        orderItems.reduceStock(products);
+        cart.clear();
     }
 
     public Long getId() {

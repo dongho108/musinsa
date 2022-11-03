@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -31,6 +32,16 @@ class OrderTest {
     void 주문금액은_배달비를_포함하지_않은_주문상품목록의_가격의_합이다(int price) {
         final Order order = getOrder(price);
         assertThat(order.calculateAmount()).isEqualTo(BigDecimal.valueOf(price));
+    }
+
+    @Test
+    void 주문을_실행하면_장바구니가_비워져야한다() {
+        final Product product = getProduct(1L, 1000);
+        final Cart cart = getCart(1L, List.of(getCartProductRequest(product, 1)));
+        final Order order = Order.from(cart);
+        order.place(cart, List.of(product));
+
+        assertThat(cart.getCartProducts()).hasSize(0);
     }
 
     private Order getOrder(final int price) {

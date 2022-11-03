@@ -43,4 +43,14 @@ public class OrderItems {
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
+
+    public void reduceStock(final List<Product> products) {
+        orderItems.forEach(orderItem -> products.forEach(product -> reduceStockByOrderItem(product, orderItem)));
+    }
+
+    private void reduceStockByOrderItem(final Product product, final OrderItem orderItem) {
+        if (orderItem.isThisProduct(product)) {
+            product.reduceStock(orderItem.getQuantity());
+        }
+    }
 }

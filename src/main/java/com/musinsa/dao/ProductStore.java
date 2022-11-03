@@ -4,9 +4,11 @@ import com.musinsa.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -50,6 +52,14 @@ public class ProductStore implements ProductDao {
     public Boolean existsBySerialNumber(final String serialNumber) {
         return store.values().stream()
                 .anyMatch(it -> it.getSerialNumber().equals(serialNumber));
+    }
+
+    @Override
+    public List<Product> findAllByIds(final List<Long> productIds) {
+        return productIds.stream()
+                .map(this::findById)
+                .map(it -> it.orElseThrow(() -> new NoSuchElementException("해당 상품이 존재하지 않습니다.")))
+                .collect(Collectors.toList());
     }
 
     @Override
