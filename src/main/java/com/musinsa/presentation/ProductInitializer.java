@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductInitializer {
 
+    private static final String DATA_SOURCE_URL = "data/items.csv";
+
     private final ProductService productService;
     private final DataLoader dataLoader;
 
@@ -19,7 +21,7 @@ public class ProductInitializer {
     }
 
     public void initData() {
-        final List<String> lines = dataLoader.read("data/items.csv");
+        final List<String> lines = dataLoader.read(DATA_SOURCE_URL);
         final List<List<String>> data = InputParser.parse(lines);
 
         for (int rowNum = 1; rowNum < data.size(); rowNum++) {
