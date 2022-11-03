@@ -27,8 +27,11 @@ public class ProductStore implements ProductDao {
     }
 
     @Override
-    public Product findById(final Long id) {
-        return store.get(id);
+    public Optional<Product> findById(final Long id) {
+        if (store.containsKey(id)) {
+            return Optional.of(store.get(id));
+        }
+        return Optional.empty();
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.musinsa.domain.Order;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Repository;
@@ -25,8 +26,11 @@ public class OrderStore implements OrderDao {
     }
 
     @Override
-    public Order findById(final Long id) {
-        return store.get(id);
+    public Optional<Order> findById(final Long id) {
+        if (store.containsKey(id)) {
+            return Optional.of(store.get(id));
+        }
+        return Optional.empty();
     }
 
     @Override

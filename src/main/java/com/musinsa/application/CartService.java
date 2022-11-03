@@ -27,7 +27,8 @@ public class CartService {
 
     public CartResponse add(final CartRequest cartRequest) {
         final Product product = getProductBySerialNumber(cartRequest.getSerialNumber());
-        final Cart cart = cartStore.findById(cartRequest.getCartId());
+        final Cart cart = cartStore.findById(cartRequest.getCartId())
+                .orElseThrow(() -> new NoSuchElementException("해당하는 cart 가 존재하지 않습니다."));
         cart.add(CartProduct.of(product, cartRequest.getQuantity()));
         return CartResponse.from(cartStore.save(cart));
     }
