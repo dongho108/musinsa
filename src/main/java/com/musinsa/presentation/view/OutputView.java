@@ -12,7 +12,7 @@ public class OutputView {
     private static final String PRODUCT_PRICE = "판매가격" + " ".repeat(3);
     private static final String PRODUCT_STOCK = "재고수" + " ".repeat(3);
     private static final String NEW_LINE = System.lineSeparator();
-    private static final String BOUNDARY_LINE = "-".repeat(30) + NEW_LINE;
+    private static final String BOUNDARY_LINE = "-".repeat(50) + NEW_LINE;
     private static final String HEAD = String.join("",
             PRODUCT_SERIAL_NUMBER,
             PRODUCT_NAME,

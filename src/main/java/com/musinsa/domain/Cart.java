@@ -26,14 +26,6 @@ public class Cart {
         return new Cart(id, cartProducts);
     }
 
-    public List<CartProduct> getCartProducts() {
-        return cartProducts;
-    }
-
-    public void add(final CartProduct cartProduct) {
-        cartProducts.add(cartProduct);
-    }
-
     private static void validateCartProducts(final List<CartProduct> cartProducts) {
         if (cartProducts == null) {
             throw new IllegalArgumentException("장바구니 상품들이 null 이면 장바구니 상품을 생성할 수 없습니다.");
@@ -44,7 +36,21 @@ public class Cart {
         }
     }
 
+    public void add(final CartProduct cartProduct) {
+        final List<CartProduct> cartProducts = new LinkedList<>(this.cartProducts);
+        cartProducts.add(cartProduct);
+        this.cartProducts = cartProducts;
+    }
+
+    public void clear() {
+        this.cartProducts = new LinkedList<>();
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public List<CartProduct> getCartProducts() {
+        return cartProducts;
     }
 }

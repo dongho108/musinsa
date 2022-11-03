@@ -17,7 +17,8 @@ public class OrderHandler implements Handler{
     private final CartService cartService;
     private final OrderService orderService;
 
-    public OrderHandler(final ProductService productService, final CartService cartService,
+    public OrderHandler(final ProductService productService,
+                        final CartService cartService,
                         final OrderService orderService) {
         this.productService = productService;
         this.cartService = cartService;

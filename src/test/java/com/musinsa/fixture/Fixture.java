@@ -4,7 +4,6 @@ import com.musinsa.domain.Cart;
 import com.musinsa.domain.CartProduct;
 import com.musinsa.domain.Order;
 import com.musinsa.domain.OrderItem;
-import com.musinsa.domain.OrderItems;
 import com.musinsa.domain.Product;
 import java.math.BigDecimal;
 import java.util.List;
@@ -40,14 +39,11 @@ public class Fixture {
     }
 
     public static Order getOrderRequest() {
-        final Product product = getProduct();
-        final CartProduct cartProductRequest = getCartProductRequest(product, 1);
-        final OrderItems orderItems = OrderItems.from(List.of(cartProductRequest));
-        return getOrderRequest(orderItems);
+        return getOrderRequest(getCart(1L, List.of(getCartProductRequest(getProduct(), 1))));
     }
 
-    public static Order getOrderRequest(final OrderItems orderItems) {
-        return new Order(orderItems);
+    public static Order getOrderRequest(final Cart cart) {
+        return Order.from(cart);
     }
 
     public static OrderItem getOrderItemRequest(final CartProduct cartProduct) {

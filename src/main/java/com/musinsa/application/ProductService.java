@@ -18,14 +18,13 @@ public class ProductService {
     }
 
     public ProductResponse create(final ProductRequest productRequest) {
-        final Product t = new Product(
+        final Product product = new Product(
                 productRequest.getSerialNumber(),
                 productRequest.getName(),
                 productRequest.getPrice(),
                 productRequest.getStock()
         );
-        final Product product = productDao.save(t);
-        return ProductResponse.of(product);
+        return ProductResponse.of(productDao.save(product));
     }
 
     public List<ProductResponse> findAll() {

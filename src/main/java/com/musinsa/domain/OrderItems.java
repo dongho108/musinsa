@@ -19,10 +19,10 @@ public class OrderItems {
 
     private static void validateCartProducts(final List<CartProduct> cartProducts) {
         if (cartProducts == null) {
-            throw new IllegalArgumentException("장바구니 상품들이 null 이면 생성할 수 없습니다.");
+            throw new IllegalArgumentException("장바구니 상품들이 null 이면 주문목록을 생성할 수 없습니다.");
         }
         if (cartProducts.size() == 0) {
-            throw new IllegalArgumentException("장바구니 상품들이 하나도 없으면 생성할 수 없습니다.");
+            throw new IllegalArgumentException("장바구니 상품들이 하나도 없으면 주문목록을 생성할 수 없습니다.");
         }
     }
 

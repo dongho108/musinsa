@@ -15,8 +15,10 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public Order(final OrderItems orderItems) {
-        this(null, orderItems);
+    public static Order from(final Cart cart) {
+        final OrderItems orderItems = OrderItems.from(cart.getCartProducts());
+        cart.clear();
+        return new Order(null, orderItems);
     }
 
     public BigDecimal calculateAmount() {
