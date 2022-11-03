@@ -50,7 +50,7 @@ public class Product {
         this.stock.set(this.stock.get() - quantity);
     }
 
-    private void validateQuantity(final Integer quantity) {
+    private synchronized void validateQuantity(final Integer quantity) {
         if (this.stock.get() < quantity) {
             throw new SoldOutException();
         }
