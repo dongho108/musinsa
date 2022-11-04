@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductInitializer {
 
-    private static final String DATA_SOURCE_URL = "data/items.csv";
+    private static final String DATA_SOURCE_URL = "/data/items.csv";
 
     private final ProductService productService;
     private final DataLoader dataLoader;

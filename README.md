@@ -1,5 +1,14 @@
 ## start
 
+- command line start
+
+```shell
+./gradlew bootJar
+java -jar build/libs/twentyninecm-0.0.1-SNAPSHOT.jar
+```
+
+- IDE start
+
 `application`을 실행시키면 콘솔에 명령어 설명창이 출력됩니다. <br>
 안내에 따라 주문을 진행하면 됩니다.
 
